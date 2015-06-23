@@ -9,6 +9,7 @@ class people::peterwardle::applications {
         'macdown',
         'evernote',
         'alfred',
+        'viscosity',
     ]
 
     package { $applications:
