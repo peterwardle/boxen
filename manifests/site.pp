@@ -76,4 +76,8 @@ node default {
     ensure => link,
     target => $boxen::config::repodir
   }
+
+  file { ['/usr/local', '/usr/local/bin']:
+    ensure => directory,
+  }
 }

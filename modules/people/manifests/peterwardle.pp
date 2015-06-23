@@ -1,3 +1,6 @@
 class people::peterwardle {
-    notify { 'class people::peterwardle declared': }
+    
+    include people::peterwardle::settings
+    include people::peterwardle::environment
+    include people::peterwardle::applications
 }
