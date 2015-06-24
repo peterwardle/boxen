@@ -41,9 +41,9 @@ class people::peterwardle::environment::dotfiles {
         require => Repository["${::boxen_srcdir}/dotfiles"],
     }
 
-    file { "/Users/${::boxen_user}/.gitexcludes":
+    file { "/Users/${::boxen_user}/.gitignore":
         ensure  => link,
-        target  => "${::boxen_srcdir}/dotfiles/gitexcludes",
+        target  => "${::boxen_srcdir}/dotfiles/gitignore",
         require => Repository["${::boxen_srcdir}/dotfiles"],
     }
 }
