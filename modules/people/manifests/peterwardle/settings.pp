@@ -14,6 +14,9 @@ class people::peterwardle::settings {
     class { 'osx::mouse::button_mode': mode => 2 }
 
     # Dock
+    include osx::dock::dim_hidden_apps
+    include osx::dock::clear_dock
+    include osx::dock::hide_indicator_lights
     class { 'osx::dock::icon_size': size => 30 }
     class { 'osx::dock::position': position => 'right' }
     class { 'osx::dock::magnification': magnification => true, magnification_size => 64 }

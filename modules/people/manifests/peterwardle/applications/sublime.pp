@@ -9,10 +9,22 @@ class people::peterwardle::applications::sublime {
         provider => appdmg,
     }
 
-    file { '/usr/local/bin/subl':
+    file { 'Add Sublime Text Cli to Path':
+        path    => '/usr/local/bin/subl',
         ensure  => link,
         target  => '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl',
         require => Package['Sublime Text'],
+    }
+
+    exec { 'Create Sublime Text Icon Resource':
+        command => 'curl -sLo Sublime-Text-Icons.zip "https://dribbble.com/shots/2104476-Material-Theme-for-Sublime-Text-3/attachments/380650" && unzip -p Sublime-Text-Icons.zip Icon.png > Sublime-Text-Icon.png && sips -i Sublime-Text-Icon.png && DeRez -only icns Sublime-Text-Icon.png > Sublime-Text-Icon.rsrc',
+        cwd     => '/tmp',
+    }
+
+    exec { 'Set Sublime Text Icon':
+        command => 'Rez -append Sublime-Text-Icon.rsrc -o $\'/Applications/Sublime Text.app/Icon\r\' && SetFile -a C "/Applications/Sublime Text.app"',
+        cwd     => '/tmp',
+        require => [Package['Sublime Text'], Exec['Create Sublime Text Icon Resource']],
     }
 
     exec { 'Subl: Package Control':
