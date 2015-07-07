@@ -10,8 +10,8 @@ class people::peterwardle::applications::sublime {
     }
 
     file { 'Add Sublime Text Cli to Path':
-        path    => '/usr/local/bin/subl',
         ensure  => link,
+        path    => '/usr/local/bin/subl',
         target  => '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl',
         require => Package['Sublime Text'],
     }
@@ -42,24 +42,28 @@ class people::peterwardle::applications::sublime {
     }
 
     repository { "${sublime_package_directory}/Material Theme":
+        path    => "${sublime_package_directory}/Material Theme",
         source  => 'equinusocio/material-theme',
         require => Package['Sublime Text'],
     }
 
     file { "${sublime_package_directory}/User/Preferences.sublime-settings":
         ensure  => link,
+        path    => "${sublime_package_directory}/User/Preferences.sublime-settings",
         target  => "${::boxen_srcdir}/appconfig/sublime-text/Preferences.sublime-settings",
         require => [Repository["${::boxen_srcdir}/appconfig"], Repository["${sublime_package_directory}/Material Theme"]],
     }
 
     # Phpcs
     repository { "${sublime_package_directory}/Phpcs":
+        path    => "${sublime_package_directory}/Phpcs",
         source  => 'benmatselby/sublime-phpcs',
         require => [Package['Sublime Text'], Exec['/usr/local/bin/phpcs'], Exec['/usr/local/bin/php-cs-fixer']],
     }
 
     file { "${sublime_package_directory}/User/phpcs.sublime-settings":
         ensure  => link,
+        path    => "${sublime_package_directory}/User/phpcs.sublime-settings",
         target  => "${::boxen_srcdir}/appconfig/sublime-text/phpcs.sublime-settings",
         require => [Repository["${::boxen_srcdir}/appconfig"], Repository["${sublime_package_directory}/Phpcs"]],
     }
@@ -77,12 +81,14 @@ class people::peterwardle::applications::sublime {
     # SublimeCodeIntel
     repository { "${sublime_package_directory}/SublimeCodeIntel":
         ensure  => 'v2.2.0+st3',
+        path    => "${sublime_package_directory}/SublimeCodeIntel",
         source  => 'SublimeCodeIntel/SublimeCodeIntel',
         require => Package['Sublime Text'],
     }
 
     file { "${sublime_package_directory}/User/SublimeCodeIntel.sublime-settings":
         ensure  => link,
+        path    => "${sublime_package_directory}/User/SublimeCodeIntel.sublime-settings",
         target  => "${::boxen_srcdir}/appconfig/sublime-text/SublimeCodeIntel.sublime-settings",
         require => [Repository["${::boxen_srcdir}/appconfig"], Repository["${sublime_package_directory}/SublimeCodeIntel"]],
     }

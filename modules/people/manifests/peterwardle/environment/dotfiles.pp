@@ -1,49 +1,55 @@
 class people::peterwardle::environment::dotfiles {
 
-    repository { "${::boxen_srcdir}/dotfiles":
+    File { mode => '0644' }
+
+    repository { 'dotfiles':
+        path    => "${::boxen_srcdir}/dotfiles",
         source  => 'git@bitbucket.org:peterwardle/dotfiles.git',
     }
-    repository { "${::boxen_srcdir}/oh-my-zsh":
+    repository { 'oh-my-zsh':
+        path    => "${::boxen_srcdir}/oh-my-zsh",
         source  => 'robbyrussell/oh-my-zsh',
     }
 
-    File {
-        mode => '0644',
-    }
-
-    file { "/Users/${::boxen_user}/.oh-my-zsh":
+    file { "user/.oh-my-zsh":
         ensure  => link,
+        path    => "/Users/${::boxen_user}/.oh-my-zsh",
         target  => "${::boxen_srcdir}/oh-my-zsh",
-        require => Repository["${::boxen_srcdir}/oh-my-zsh"],
+        require => Repository['oh-my-zsh'],
     }
 
-    file { "/Users/${::boxen_user}/.zshrc":
+    file { "user/.zshrc":
         ensure  => link,
+        path    => "/Users/${::boxen_user}/.zshrc",
         target  => "${::boxen_srcdir}/dotfiles/zshrc",
-        require => Repository["${::boxen_srcdir}/dotfiles"],
+        require => Repository['dotfiles'],
     }
 
-    file { "/Users/${::boxen_user}/.vim":
+    file { "user/.vim":
         ensure  => link,
+        path    => "/Users/${::boxen_user}/.vim",
         target  => "${::boxen_srcdir}/dotfiles/vim",
-        require => Repository["${::boxen_srcdir}/dotfiles"],
+        require => Repository['dotfiles'],
     }
 
-    file { "/Users/${::boxen_user}/.vimrc":
+    file { "user/.vimrc":
         ensure  => link,
+        path    => "/Users/${::boxen_user}/.vimrc",
         target  => "${::boxen_srcdir}/dotfiles/vimrc",
-        require => Repository["${::boxen_srcdir}/dotfiles"],
+        require => Repository['dotfiles'],
     }
 
-    file { "/Users/${::boxen_user}/.gitconfig":
+    file { "user/.gitconfig":
         ensure  => link,
+        path    => "/Users/${::boxen_user}/.gitconfig",
         target  => "${::boxen_srcdir}/dotfiles/gitconfig",
-        require => Repository["${::boxen_srcdir}/dotfiles"],
+        require => Repository['dotfiles'],
     }
 
-    file { "/Users/${::boxen_user}/.gitignore":
+    file { "User .gitignore":
         ensure  => link,
+        path    => "/Users/${::boxen_user}/.gitignore",
         target  => "${::boxen_srcdir}/dotfiles/gitignore",
-        require => Repository["${::boxen_srcdir}/dotfiles"],
+        require => Repository['dotfiles'],
     }
 }

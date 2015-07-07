@@ -15,7 +15,7 @@ class people::peterwardle::settings {
 
     # Dock
     include osx::dock::dim_hidden_apps
-    include osx::dock::clear_dock
+    #include osx::dock::clear_dock
     include osx::dock::hide_indicator_lights
     class { 'osx::dock::icon_size': size => 30 }
     class { 'osx::dock::position': position => 'right' }

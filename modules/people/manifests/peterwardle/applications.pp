@@ -10,6 +10,12 @@ class people::peterwardle::applications {
         'evernote',
         'alfred',
         'viscosity',
+        'spotify',
+        'airfoil',
+        'spectacle',
+        'telegram',
+        'vlc',
+        'steam',
     ]
 
     package { $applications:

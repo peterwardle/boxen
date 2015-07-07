@@ -1,5 +1,6 @@
 class people::peterwardle::environment {
 
+    include people::peterwardle::environment::ssh
     include people::peterwardle::environment::dotfiles
 
     package { 'zsh': }
@@ -17,13 +18,14 @@ class people::peterwardle::environment {
         require => Package['zsh'],
     }
 
-    repository { "${::boxen_srcdir}/powerline-fonts":
+    repository { 'src/powerline-fonts':
+        path   => "${::boxen_srcdir}/powerline-fonts",
         source => "powerline/fonts",
     }
 
     exec { 'install powerline fonts':
         command => 'bash ./install.sh',
         cwd     => "${::boxen_srcdir}/powerline-fonts",
-        require => Repository["${::boxen_srcdir}/powerline-fonts"],
+        require => Repository['src/powerline-fonts'],
     }
 }
