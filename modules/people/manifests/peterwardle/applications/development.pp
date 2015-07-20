@@ -7,6 +7,9 @@ class people::peterwardle::applications::development {
         'phantomjs',
         'ngrep',
         'goaccess',
+        'watch',
+        'git-flow',
+        'wget',
     ]
 
     $applications = [
