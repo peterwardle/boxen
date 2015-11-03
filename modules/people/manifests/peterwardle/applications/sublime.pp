@@ -2,7 +2,7 @@ class people::peterwardle::applications::sublime {
 
     # $sublime_app_directory = "/Applications/Sublime Text.app"
     $sublime_app_directory = "/opt/homebrew-cask/Caskroom/sublime-text3/Build 3083/Sublime Text.app"
-    $sublime_lib_directory = "/Users/${::boxen_user}/Library/Application Support/Sublime Text 3/"
+    $sublime_lib_directory = "/Users/${::boxen_user}/Library/Application Support/Sublime Text 3"
     $sublime_package_directory = "${sublime_lib_directory}/Packages"
 
     file { 'Add Sublime Text Cli to Path':
@@ -43,38 +43,12 @@ class people::peterwardle::applications::sublime {
         require => Package['sublime-text3'],
     }
 
-    file { "${sublime_package_directory}/User/Preferences.sublime-settings":
-        ensure  => link,
-        path    => "${sublime_package_directory}/User/Preferences.sublime-settings",
-        target  => "${::boxen_srcdir}/appconfig/sublime-text/Preferences.sublime-settings",
-        require => [Repository["${::boxen_srcdir}/appconfig"], Repository["${sublime_package_directory}/Material Theme"]],
-    }
-
-    # Phpcs
     repository { "${sublime_package_directory}/Phpcs":
         path    => "${sublime_package_directory}/Phpcs",
         source  => 'benmatselby/sublime-phpcs',
         require => [Package['sublime-text3'], Package['homebrew/php/php-code-sniffer'], Package['homebrew/php/php-cs-fixer']],
     }
 
-    file { "${sublime_package_directory}/User/phpcs.sublime-settings":
-        ensure  => link,
-        path    => "${sublime_package_directory}/User/phpcs.sublime-settings",
-        target  => "${::boxen_srcdir}/appconfig/sublime-text/phpcs.sublime-settings",
-        require => [Repository["${::boxen_srcdir}/appconfig"], Repository["${sublime_package_directory}/Phpcs"]],
-    }
-
-    # exec { '/usr/local/bin/phpcs':
-    #     creates => '/usr/local/bin/phpcs',
-    #     command => 'curl -sLo /usr/local/bin/phpcs https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && chmod +x /usr/local/bin/phpcs',
-    # }
-
-    # exec { '/usr/local/bin/php-cs-fixer':
-    #     creates => '/usr/local/bin/php-cs-fixer',
-    #     command => 'curl -sLo /usr/local/bin/php-cs-fixer http://get.sensiolabs.org/php-cs-fixer.phar && chmod +x /usr/local/bin/php-cs-fixer',
-    # }
-
-    # SublimeCodeIntel
     repository { "${sublime_package_directory}/SublimeCodeIntel":
         ensure  => 'v2.2.0+st3',
         path    => "${sublime_package_directory}/SublimeCodeIntel",
@@ -82,10 +56,13 @@ class people::peterwardle::applications::sublime {
         require => Package['sublime-text3'],
     }
 
-    file { "${sublime_package_directory}/User/SublimeCodeIntel.sublime-settings":
-        ensure  => link,
-        path    => "${sublime_package_directory}/User/SublimeCodeIntel.sublime-settings",
-        target  => "${::boxen_srcdir}/appconfig/sublime-text/SublimeCodeIntel.sublime-settings",
-        require => [Repository["${::boxen_srcdir}/appconfig"], Repository["${sublime_package_directory}/SublimeCodeIntel"]],
+    symlink { [
+            'Package Control.sublime-settings',
+            'Preferences.sublime-settings',
+            'SublimeCodeIntel.sublime-settings',
+            'phpcs.sublime-settings'
+        ]:
+        source_dir => "${::boxen_srcdir}/appconfig/sublime-text",
+        destination_dir => "${sublime_package_directory}/User",
     }
 }

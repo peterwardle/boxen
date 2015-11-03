@@ -1,4 +1,12 @@
 class people::peterwardle {
+
+    define symlink($source_dir, $destination_dir) {
+        file { "Symlink ${name}: from '${source_dir}' to '${destination_dir}'":
+            ensure  => link,
+            path    => "${destination_dir}/${name}",
+            target  => "${source_dir}/${name}",
+        }
+    }
     
     sudoers{ 'allow passwordless sudo for user':
         users    => "${boxen_user}",
