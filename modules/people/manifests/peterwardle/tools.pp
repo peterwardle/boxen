@@ -12,7 +12,9 @@ class people::peterwardle::tools {
             'goaccess',
             'watch',
             'git-flow',
-            'wget'
+            'wget',
+            'coreutils',
+            'findutils'
         ]:
     }
 
