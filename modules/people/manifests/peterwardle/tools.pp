@@ -14,7 +14,6 @@ class people::peterwardle::tools {
             'git-flow',
             'wget',
             'coreutils',
-            'findutils',
             'tree'
         ]:
     }
