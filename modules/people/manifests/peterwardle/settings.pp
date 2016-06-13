@@ -18,6 +18,6 @@ class people::peterwardle::settings {
     #include osx::dock::clear_dock
     include osx::dock::hide_indicator_lights
     class { 'osx::dock::icon_size': size => 30 }
-    class { 'osx::dock::position': position => 'right' }
+    class { 'osx::dock::position': position => 'left' }
     class { 'osx::dock::magnification': magnification => true, magnification_size => 64 }
 }

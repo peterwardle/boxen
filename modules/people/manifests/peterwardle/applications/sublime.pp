@@ -1,7 +1,7 @@
 class people::peterwardle::applications::sublime {
 
     # $sublime_app_directory = "/Applications/Sublime Text.app"
-    $sublime_app_directory = "/opt/homebrew-cask/Caskroom/sublime-text3/Build 3083/Sublime Text.app"
+    $sublime_app_directory = "/Users/${::boxen_user}/Applications/Sublime Text.app"
     $sublime_lib_directory = "/Users/${::boxen_user}/Library/Application Support/Sublime Text 3"
     $sublime_package_directory = "${sublime_lib_directory}/Packages"
 

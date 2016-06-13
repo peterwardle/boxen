@@ -24,7 +24,8 @@ class people::peterwardle::applications {
             'virtualbox',
             'vagrant',
             'atom',
-            'sublime-text3'
+            'sublime-text3',
+            'google-cloud-sdk'
         ]:
         provider => 'brewcask',
     }

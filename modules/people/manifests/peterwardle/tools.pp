@@ -27,4 +27,14 @@ class people::peterwardle::tools {
         ]:
         install_options => ['--ignore-dependencies']
     }
+
+    # exec { 'install Google Cloud SDK':
+    #     unless  => 'gcloud -v &> /dev/null',
+    #     command => 'curl https://sdk.cloud.google.com | bash && exec -l $SHELL && gcloud init',
+    # }
+
+    # exec { 'install kubectrl':
+    #     command => 'gcloud components install kubectl',
+    #     require => Exec['install Google Cloud SDK'],
+    # }
 }
