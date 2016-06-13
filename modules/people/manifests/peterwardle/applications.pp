@@ -18,14 +18,12 @@ class people::peterwardle::applications {
             'spectacle',
             'telegram',
             'vlc',
-            'steam',
             'paw',
             'sequel-pro',
             'virtualbox',
             'vagrant',
             'atom',
-            'sublime-text3',
-            'google-cloud-sdk'
+            'sublime-text3'
         ]:
         provider => 'brewcask',
     }
@@ -37,4 +35,5 @@ class people::peterwardle::applications {
     
     include people::peterwardle::applications::sublime
     include people::peterwardle::applications::atom
+    include people::peterwardle::applications::vagrant
 }
