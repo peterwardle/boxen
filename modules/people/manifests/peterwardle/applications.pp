@@ -23,7 +23,7 @@ class people::peterwardle::applications {
             'virtualbox',
             'vagrant',
             'atom',
-            'sublime-text3'
+            'sublime-text'
         ]:
         provider => 'brewcask',
     }
