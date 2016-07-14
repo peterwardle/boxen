@@ -2,8 +2,7 @@ class people::peterwardle::applications {
 
     homebrew::tap { 'caskroom/versions': }
 
-    package {
-        [
+    package { [
             'iterm2',
             'google-chrome',
             'slack',
@@ -32,7 +31,7 @@ class people::peterwardle::applications {
         path   => "${::boxen_srcdir}/appconfig",
         source => 'git@bitbucket.org:peterwardle/appconfig.git'
     }
-    
+
     include people::peterwardle::applications::sublime
     include people::peterwardle::applications::atom
     include people::peterwardle::applications::vagrant

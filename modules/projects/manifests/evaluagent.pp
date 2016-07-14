@@ -10,11 +10,7 @@ class projects::evaluagent {
         provider => 'brewcask',
     }
 
-    package {
-        [
-            'kubernetes-cli'
-        ]:
-    }
+    package { ['kubernetes-cli']: }
 
     exec { 'download awscli':
         unless  => 'test -e /usr/local/bin/aws',
@@ -30,7 +26,15 @@ class projects::evaluagent {
         require => Exec['download awscli'],
     }
 
-    $scripts = ['docker', 'docker-machine', 'docker-compose']
+    # $scripts = ['docker', 'docker-machine', 'docker-compose']
+    # define bash::completion::symlink ($src, $script = $title) {
+    #     file {"/usr/local/etc/bash_completion.d/${script}.bash-completion":
+    #         ensure => "${src}/${script}.bash-completion",
+    #     }
+    # }
+    # bash::completion::symlink { $scripts:
+    #     src => '/Applications/Docker.app/Contents/Resources/etc',
+    # }
 
     # Puppet > 4.0
     # $scripts.each |String $script| {
@@ -39,13 +43,5 @@ class projects::evaluagent {
     #         require => Exec['docker'],
     #     }
     # }
-
-    define bash::completion::symlink ($src, $script = $title) {
-        file {"/usr/local/etc/bash_completion.d/${script}.bash-completion":
-            ensure => "${src}/${script}.bash-completion",
-        }
-    }
-    bash::completion::symlink { $scripts:
-        src => '/Applications/Docker.app/Contents/Resources/etc',
-    }
+    # END
 }

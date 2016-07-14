@@ -46,7 +46,7 @@ class people::peterwardle::applications::sublime {
     repository { "${sublime_package_directory}/Phpcs":
         path    => "${sublime_package_directory}/Phpcs",
         source  => 'benmatselby/sublime-phpcs',
-        require => [Package['sublime-text'], Package['homebrew/php/php-code-sniffer'], Package['homebrew/php/php-cs-fixer']],
+        require => [Package['sublime-text'], Package['php-code-sniffer'], Package['php-cs-fixer']],
     }
 
     repository { "${sublime_package_directory}/SublimeCodeIntel":
