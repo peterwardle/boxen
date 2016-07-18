@@ -1,11 +1,13 @@
 class people::peterwardle::applications::atom {
-    exec { 'Install:autocomplete-plus':
-        command => 'apm install autocomplete-plus',
-        require => Package['atom'],
-    }
+    # # The autocomplete-plus package is bundled with Atom and should not be explicitly installed.
+    # exec { 'Atom:autocomplete-plus':
+    #     command => 'apm install autocomplete-plus',
+    #     require => Package['atom'],
+    # }
 
-    exec { 'Install:autocomplete-php':
+    exec { 'Atom:autocomplete-php':
+        unless => 'apm list | grep autocomplete-php',
         command => 'apm install autocomplete-php',
-        require => Exec['Install:autocomplete-plus'],
+        # require => Exec['Atom:autocomplete-plus'],
     }
 }
