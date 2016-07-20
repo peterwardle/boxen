@@ -1,13 +1,22 @@
 class people::peterwardle::applications::atom {
-    exec { 'Atom:autocomplete-plus':
-        unless => 'apm list | grep autocomplete-plus',
-        command => 'apm install autocomplete-plus',
-        require => Package['atom'],
+
+    define atompackage {
+        exec { "Atom:${title}":
+            unless => 'apm list | grep file-icons',
+            command => 'apm install file-icons',
+            require => Package['atom'],
+        }
     }
 
-    exec { 'Atom:autocomplete-php':
-        unless => 'apm list | grep autocomplete-php',
-        command => 'apm install autocomplete-php',
-        require => Exec['Atom:autocomplete-plus'],
+    atompackage { [
+            'autocomplete-plus',
+            # 'autocomplete-php',
+            'highlight-selected',
+            'file-icons',
+        ]:
+    }
+
+    atompackage { 'autocomplete-php':
+        require => Atompackage['autocomplete-plus'],
     }
 }
