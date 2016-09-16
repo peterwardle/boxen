@@ -13,6 +13,7 @@ class people::peterwardle::applications::atom {
             # 'autocomplete-php',
             'highlight-selected',
             'file-icons',
+            'docblockr',
         ]:
     }
 
