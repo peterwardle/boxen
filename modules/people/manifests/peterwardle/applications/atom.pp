@@ -2,8 +2,8 @@ class people::peterwardle::applications::atom {
 
     define atompackage {
         exec { "Atom:${title}":
-            unless => 'apm list | grep file-icons',
-            command => 'apm install file-icons',
+            unless => "apm list | grep ${title}",
+            command => "apm install ${title}",
             require => Package['atom'],
         }
     }
