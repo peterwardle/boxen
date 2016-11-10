@@ -12,7 +12,8 @@ class people::peterwardle::tools {
             'git-flow',
             'wget',
             'coreutils',
-            'tree'
+            'tree',
+            'httpstat'
         ]:
     }
 
