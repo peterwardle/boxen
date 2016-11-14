@@ -13,7 +13,8 @@ class people::peterwardle::tools {
             'wget',
             'coreutils',
             'tree',
-            'httpstat'
+            'httpstat',
+            'httpie'
         ]:
     }
 
