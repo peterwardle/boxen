@@ -1,5 +1,7 @@
 class people::peterwardle::applications::atom {
 
+    $atom_config_directory = "/Users/${::boxen_user}/.atom"
+
     define atompackage {
         exec { "Atom:${title}":
             unless => "apm list | grep ${title}",
@@ -19,5 +21,15 @@ class people::peterwardle::applications::atom {
 
     atompackage { 'autocomplete-php':
         require => Atompackage['autocomplete-plus'],
+    }
+    atompackage { 'php-cs-fixer':
+        require => Package['php-cs-fixer'],
+    }
+
+    symlink { [
+            'config.cson'
+        ]:
+        source_dir => "${::boxen_srcdir}/appconfig/atom",
+        destination_dir => "${atom_config_directory}",
     }
 }
