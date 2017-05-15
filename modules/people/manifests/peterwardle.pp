@@ -7,16 +7,17 @@ class people::peterwardle {
             target  => "${source_dir}/${name}",
         }
     }
-    
+
     sudoers{ 'allow passwordless sudo for user':
         users    => "${boxen_user}",
         type     => 'user_spec',
         commands => '(ALL) NOPASSWD: ALL',
-        hosts    => 'ALL', 
+        hosts    => 'ALL',
     }
 
     define machineidentifiers {
-        $machine_identifier = "${boxen_user}-mbpr"
+        # $machine_identifier = "${boxen_user}-mbpr"
+        $machine_identifier = "pw-mbp"
         exec { "Set ${title}":
             unless  => "test '${machine_identifier}' = `scutil --get ${title}`",
             command => "scutil --set ${title} '${machine_identifier}'",
